@@ -1,330 +1,394 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-</head>
-<style>
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    font: inherit;
-    box-sizing: border-box;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            font: inherit;
+            box-sizing: border-box;
+        }
 
-:root {
-    --bg--light: hsl(200, 10%, 92%);
-    --bg--base: #ffffff;
-    --primary--dark: hsl(188, 21%, 58%);
-    --primary--accent: hsl(188, 86%, 41%);
-    --secondary--dark: hsl(207, 41%, 44%);
-    --secondary--light: hsl(200, 22%, 78%);
-    --text-clr-200: hsl(195, 6%, 34%);
-    --text-clr-300: hsl(197, 8%, 54%);
-    --text-clr-400: hsl(199, 8%, 70%);
-    --border-clr: hsl(200, 10%, 83%);
-    --fs--base: 1rem;
-    --fs--01: 0.889rem;
-    --fs--02: 1.125rem;
-    --fs--03: 1.266rem;
-    --fs-title--s: 2.027rem;
-    --fs-title--m: 1.802rem;
-    --fs-title--l: 2.566rem;
-    --fs-title--xl: 3.247rem;
-    --space--025: 0.25rem;
-    --space--05: 0.5rem;
-    --space--075: 0.75rem;
-    --space--1: 1rem;
-    --space--15: 1.5rem;
-    --space--2: 2rem;
-}
-picture,
-img {
-    display: block;
-    max-width: 100%;
-    object-fit: cover;
-}
-body {
-    display:grid;
-    place-items:center;
-    font-family: "Roboto", sans-serif;
-    min-block-size: 100vh;
-    background: hsl(200, 10%, 92%);
-}
-.container {
-    display: grid;
-    grid-template-rows: auto 1fr min-content;
-    grid-template-columns: auto 1fr;
-    grid-template-areas: "aside header" "aside main" "footer footer";
-    width: 794px;
-    max-height: 1123px;
-    margin-inline: auto;
-    outline: 1px solid var(--text-clr-200);
-    border-radius: 0.5rem;
-    padding: var(--space--1);
-    gap: 0 var(--space--1);
-    background-color: var(--bg--base);
-}
-.header {
-    grid-area: header;
-    display: grid;
-    place-content: center;
-    position: relative;
-    min-height: 20rem;
-    isolation: isolate;
-}
-.header::after {
-    z-index: -1;
-    content: "";
-    position: absolute;
-    inset: 0;
-    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 75%);
-    background-color: var(--primary--accent);
-}
-.primary--heading {
-    text-align: center;
-    margin-inline: 0.5rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    margin-block-end: 0.75rem;
-    font-size: clamp(2rem, -0.29rem + 5.73vw, 3.38rem);
-}
-.heading--deco {
-    display: inline-flex;
-    margin-inline-start: 0.75rem;
-    align-self: flex-start;
-    letter-spacing: calc(0.25rem + 0.5vw);
-    color: #fff;
-}
-.secondary--heading {
-    font-style: italic;
-    background-color: #fff;
-    margin-inline: auto;
-    padding-inline: 1em;
-    color: var(--text-clr-300);
-    font-size: clamp(1.4rem, 0.86rem + 1.35vw, 1.73rem);
-}
-.aside {
-    grid-area: aside;
-    display: grid;
-    grid-template-columns: fit-content(27vh);
-    gap: var(--space--2);
-    border: 2px solid var(--border-clr);
-}
-.image__container {
-    margin-inline: var(--space--1);
-    margin-block-start: var(--space--1);
-}
-.image {
-    object-fit: cover;
-    outline: 3px solid #fff;
-    outline-offset: -0.5rem;
-}
-.details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space--1);
-}
-.details [role="list"] {
-    margin-inline: var(--space--1);
-    list-style: none;
-}
-.title {
-    margin-block-end: var(--space--1);
-    max-width: 20ch;
-    background-color: var(--bg--light);
-    padding: var(--space--025) var(--space--1);
-    color: var(--primary--accent);
-    font-weight: 500;
-}
-.contact__information [role="listitem"] {
-    margin-inline: var(--space--05);
-    display: flex;
-    align-items: center;
-    gap: var(--space--05);
-    height: 2.5rem;
-}
-.icon {
-    display: inline-grid;
-    aspect-ratio: 1;
-    height: 100%;
-    place-content: center;
-    color: var(--primary--accent);
-    font-size: 1.25em;
-}
-.text {
-    font-weight: 500;
-    color: var(--text-clr-300);
-}
-.education :has([role="list"]):nth-last-of-type(2) {
-    margin-block-end: 1rem;
-}
-.sub--title {
-    font-weight: 600;
-    margin-block-end: var(--space--025);
-    text-transform: uppercase;
-    color: var(--primary--accent);
-}
-.sublistitem {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 3rem;
-}
-.sublistitem > *:last-of-type {
-    color: var(--text-clr-300);
-    font-weight: 400;
-}
-.sub--text {
-    font-size: var(--fs--01);
-    text-transform: uppercase;
-    font-weight: 600;
-    color: var(--text-clr-200);
-}
-.main {
-    grid-area: main;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
-.about__me {
-    flex: 0 1 auto;
-}
-.about__me p {
-    max-width: 55ch;
-    color: var(--text-clr-200);
-}
-.skills__content--flow {
-    display: flex;
-    gap: var(--space--05);
-}
-.skills__content--flow > * {
-    flex: 1;
-}
-.special__skills {
-    display: inline-flex;
-    flex-direction: column;
-    list-style: none;
-    gap: 0.25rem;
-    counter-reset: special-counter;
-}
-.special__skills li {
-    font-size: var(--fs--01);
-    font-weight: bold;
-    counter-increment: special-counter;
-}
-.special__skills li::before {
-    content: counter(special-counter);
-    background-color: var(--primary--accent);
-    outline: 2px solid #fff;
-    outline-offset: -0.25rem;
-    display: inline-grid;
-    place-content: center;
-    margin-inline: 0.5rem;
-    border-radius: 50%;
-    font-size: 1.125rem;
-    aspect-ratio: 1;
-    color: #fff;
-    height: 1.75rem;
-}
-.special__skills > * {
-    color: var(--text-clr-300);
-}
-.skill__diagram {
-    margin-top: 0.5rem;
-}
-.diagram {
-    background-color: var(--bg--light);
-}
-.diagram--id {
-    background-color: #fff;
-    color: var(--text-clr-200);
-    font-weight: bold;
-    font-size: var(--fs--01);
-    line-height: 1.6;
-}
-.skill-bar {
-    justify-content: end;
-    color: #fff;
-</style>
+        :root {
+            --bg--light: hsl(200, 10%, 92%);
+            --bg--base: #ffffff;
+            --primary--dark: hsl(188, 21%, 58%);
+            --primary--accent: hsl(188, 86%, 41%);
+            --secondary--dark: hsl(207, 41%, 44%);
+            --secondary--light: hsl(200, 22%, 78%);
+            --text-clr-200: hsl(195, 6%, 34%);
+            --text-clr-300: hsl(197, 8%, 54%);
+            --text-clr-400: hsl(199, 8%, 70%);
+            --border-clr: hsl(200, 10%, 83%);
+            --fs--base: 1rem;
+            --fs--01: 0.889rem;
+            --fs--02: 1.125rem;
+            --fs--03: 1.266rem;
+            --fs-title--s: 2.027rem;
+            --fs-title--m: 1.802rem;
+            --fs-title--l: 2.566rem;
+            --fs-title--xl: 3.247rem;
+            --space--025: 0.25rem;
+            --space--05: 0.5rem;
+            --space--075: 0.75rem;
+            --space--1: 1rem;
+            --space--15: 1.5rem;
+            --space--2: 2rem;
+        }
+
+        picture,
+        img {
+            display: block;
+            max-width: 100%;
+            object-fit: cover;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            font-family: "Roboto", sans-serif;
+            min-block-size: 100vh;
+            background: hsl(200, 10%, 92%);
+        }
+
+        .container {
+            display: grid;
+            grid-template-rows: auto 1fr min-content;
+            grid-template-columns: auto 1fr;
+            grid-template-areas: "aside header" "aside main" "footer footer";
+            width: 794px;
+            max-height: 1123px;
+            margin-inline: auto;
+            outline: 1px solid var(--text-clr-200);
+            border-radius: 0.5rem;
+            padding: var(--space--1);
+            gap: 0 var(--space--1);
+            background-color: var(--bg--base);
+        }
+
+        .header {
+            grid-area: header;
+            display: grid;
+            place-content: center;
+            position: relative;
+            min-height: 20rem;
+            isolation: isolate;
+        }
+
+        .header::after {
+            z-index: -1;
+            content: "";
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 75%);
+            background-color: var(--primary--accent);
+        }
+
+        .primary--heading {
+            text-align: center;
+            margin-inline: 0.5rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-block-end: 0.75rem;
+            font-size: clamp(2rem, -0.29rem + 5.73vw, 3.38rem);
+        }
+
+        .heading--deco {
+            display: inline-flex;
+            margin-inline-start: 0.75rem;
+            align-self: flex-start;
+            letter-spacing: calc(0.25rem + 0.5vw);
+            color: #fff;
+        }
+
+        .secondary--heading {
+            font-style: italic;
+            background-color: #fff;
+            margin-inline: auto;
+            padding-inline: 1em;
+            color: var(--text-clr-300);
+            font-size: clamp(1.4rem, 0.86rem + 1.35vw, 1.73rem);
+        }
+
+        .aside {
+            grid-area: aside;
+            display: grid;
+            grid-template-columns: fit-content(27vh);
+            gap: var(--space--2);
+            border: 2px solid var(--border-clr);
+            padding: var(--space--1);
+        }
+
+        .image__container {
+            margin-inline: var(--space--1);
+            margin-block-start: var(--space--1);
+        }
+
+        .image {
+            object-fit: cover;
+            outline: 3px solid #fff;
+            outline-offset: -0.5rem;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space--1);
+        }
+
+        
+        .title {
+            margin-block-end: var(--space--1);
+            max-width: 20ch;
+            background-color: var(--bg--light);
+            padding: var(--space--025) var(--space--1);
+            color: var(--primary--accent);
+            font-weight: 500;
+        }
+
+       
+
+        .icon {
+            display: inline-grid;
+            aspect-ratio: 1;
+            height: 100%;
+            place-content: center;
+            color: var(--primary--accent);
+            font-size: 1.25em;
+        }
+
+        .text {
+            font-weight: 500;
+            color: var(--text-clr-300);
+        }
+
+        .education :has([role="list"]):nth-last-of-type(2) {
+            margin-block-end: 1rem;
+        }
+
+        .sub--title {
+            font-weight: 600;
+            margin-block-end: var(--space--025);
+            text-transform: uppercase;
+            color: var(--primary--accent);
+        }
+
+        
+
+        .sublistitem > *:last-of-type {
+            color: var(--text-clr-300);
+            font-weight: 400;
+        }
+
+        .sub--text {
+            font-size: var(--fs--01);
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-clr-200);
+        }
+
+        .main {
+            grid-area: main;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .about__me {
+            flex: 0 1 auto;
+        }
+
+        .about__me p {
+            max-width: 55ch;
+            color: var(--text-clr-200);
+        }
+
+        .skills__content--flow {
+            display: flex;
+            gap: var(--space--05);
+        }
+
+        .skills__content--flow > * {
+            flex: 1;
+        }
+
+        .special__skills {
+            display: inline-flex;
+            flex-direction: column;
+            list-style: none;
+            gap: 0.25rem;
+            counter-reset: special-counter;
+        }
+
+        .special__skills li {
+            font-size: var(--fs--01);
+            font-weight: bold;
+            counter-increment: special-counter;
+        }
+
+        .special__skills li::before {
+            content: counter(special-counter);
+            background-color: var(--primary--accent);
+            outline: 2px solid #fff;
+            outline-offset: -0.25rem;
+            display: inline-grid;
+            place-content: center;
+            margin-inline: 0.5rem;
+            border-radius: 50%;
+            font-size: 1.125rem;
+            aspect-ratio: 1;
+            color: #fff;
+            height: 1.75rem;
+        }
+
+        .special__skills > * {
+            color: var(--text-clr-300);
+        }
+
+        .skill__diagram {
+            margin-top: 0.5rem;
+        }
+
+        .diagram {
+            background-color: var(--bg--light);
+        }
+
+        .diagram--id {
+            background-color: #fff;
+            color: var(--text-clr-200);
+            font-weight: bold;
+            font-size: var(--fs--01);
+            line-height: 1.6;
+        }
+
+        .skill-bar {
+            justify-content: end;
+            color: #fff;
+        }
+    </style>
+</head>
 <body>
 
 <div class="container" contenteditable="true">
     <header class="header">
         <h1 class="primary--heading" contenteditable="true">Abc<span class="heading--deco">def</span></h1>
-        <h2 class="secondary--heading" contenteditable="true">software Developer</h2>
+        <h2 class="secondary--heading" contenteditable="true">Software Developer</h2>
     </header>
+    
+    <!-- Basic Information and Image -->
     <aside class="aside" contenteditable="true">
-        <figure class="image__container" contenteditable="true"> <img src="C:\Users\janha\Downloads\profile-image.jpg" alt="" class="image"> </figure>
+        <figure class="image__container" contenteditable="true">
+            <img src="C:\Users\janha\Downloads\profile-image.jpg" alt="Profile Image" class="image">
+        </figure>
         <article class="details">
+            <h3 class="title">Basic Information</h3>
             <ul role="list" class="contact__information">
-                <h3 class="title">Contact</h3>
-                <li role="listitem">  <span class="text">India</span> </li>
-                <li role="listitem">  <span class="text">+915234696</span> </li>
-                <li role="listitem">  <span class="text">abc@hotmale.com</span> </li>
-                <li role="listitem"> <span class="text">codepen.io</span> </li>
-            </ul>
-            <ul role="list" class="education" contenteditable="true">
-                <h3 class="title">Education</h3>
-                <li role="listitem">
-                    <h4 class="sub--title" contenteditable="true">Schools:</h4>
-                    <ul role="list" class="sublist">
-                        <li role="listitem" class="sublistitem"contenteditable="true"> <span class="text sub--text">University of Computers</span> <span>2015</span> </li>
-                        <li role="listitem" class="sublistitem" contenteditable="true"> <span class="text sub--text">University of ICT</span> <span>2018</span> </li>
-                        <li role="listitem" class="sublistitem" contenteditable="true"> <span class="text sub--text">University of Google</span> <span>2020</span> </li>
-                    </ul>
-                </li>
-                <li role="listitem">
-                    <h4 class="sub--title">Courses:</h4>
-                    <ul role="list" class="sublist">
-                        <li role="listitem" class="sublistitem" contenteditable="true"> <span class="text sub--text">Conquering Responsive Layouts</span> <span>Kevin Powell</span> </li>
-                        <li role="listitem" class="sublistitem" contenteditable="true"> <span class="text sub--text">Flexbox Simplyfied</span> <span>Kevin Powell</span> </li>
-                        <li role="listitem" class="sublistitem" contenteditable="true"> <span class="text sub--text">HTML Course</span> <span>SoloLearn Certificate</span> </li>
-                        <li role="listitem" class="sublistitem" contenteditable="true"> <span class="text sub--text">CSS Course</span> <span>SoloLearn Certificate</span> </li>
-                    </ul>
-                </li>
+                <li role="listitem"> <span class="text">Name: Abc Def</span> </li>
+                <li role="listitem"> <span class="text">Title: Software Developer</span> </li>
+                <li role="listitem"> <span class="text">LinkedIn: linkedin.com/in/abc</span> </li>
+                <li role="listitem"> <span class="text">GitHub: github.com/abc</span> </li>
+                <li role="listitem"> <span class="text">Phone: +915234696</span> </li>
+                <li role="listitem"> <span class="text">Email: abc@hotmale.com</span> </li>
             </ul>
         </article>
     </aside>
+
+    <!-- Main Content: About Me, Work Experience, Projects, Education, Skills, Languages -->
     <main class="main">
         <article class="about__me" contenteditable="true">
             <h3 class="title">About Me</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, quod nesciunt? Facilis debitis beatae tempore nemo assumenda ducimus, culpa ex itaque ullam, inventore earum corporis? Atque et doloribus aspernatur soluta!</p> <br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum numquam molestias tempore, dolorem accusamus minus in eveniet voluptates inventore quis ducimus quod eum recusandae autem fugit, alias placeat?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget nulla ac justo malesuada dictum.</p>
         </article>
-        <article class="skills" contenteditable="true">
-            <h3 class="title">Skills</h3>
-            <div class="skills__content--flow">
-                <ol role="list" class="special__skills">
-                    <li role="listitem">Semantic</li>
-                    <li role="listitem">Modern CSS</li>
-                    <li role="listitem">CSS Flexbox</li>
-                    <li role="listitem">Custom variables</li>
-                    <li role="listitem">CSS Math Functions</li>
-                    <li role="listitem">Conditional CSS</li>
-                    <li role="listitem">Responsive layout</li>
-                </ol>
-                <section class="skill__diagram" contenteditable="true">
-                    <figcaption class="diagram">
-                        <h5 class="diagram--id">HTML</h5> <span class="skill-bar html">75%</span>
-                    </figcaption>
-                    <figcaption class="diagram">
-                        <h5 class="diagram--id">CSS</h5> <span class="skill-bar css">87%</span>
-                    </figcaption>
-                    <figcaption class="diagram">
-                        <h5 class="diagram--id">JavaScript</h5> <span class="skill-bar javascript">60%</span>
-                    </figcaption>
-                    <figcaption class="diagram">
-                        <h5 class="diagram--id">Python</h5> <span class="skill-bar python">17%</span>
-                    </figcaption>
-                </section>
-            </div>
+
+        <!-- Work Experience -->
+        <article class="work__experience" contenteditable="true">
+            <h3 class="title">Work Experience</h3>
+            <ul role="list">
+                <li role="listitem">
+                    <h4 class="sub--title">Software Developer at Company ABC</h4>
+                    <span>2020 - Present</span>
+                    <ul role="list">
+                        <li role="listitem">Developed web applications using HTML, CSS, and JavaScript.</li>
+                        <li role="listitem">Collaborated with cross-functional teams to design and implement software solutions.</li>
+                    </ul>
+                </li>
+                <li role="listitem">
+                    <h4 class="sub--title">Junior Developer at Company XYZ</h4>
+                    <span>2018 - 2020</span>
+                    <ul role="list">
+                        <li role="listitem">Maintained and improved the company website.</li>
+                        <li role="listitem">Worked on bug fixes and performance enhancements.</li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+
+        <!-- Projects -->
+        <article class="projects" contenteditable="true">
+            <h3 class="title">Projects</h3>
+            <ul role="list">
+                <li role="listitem">
+                    <h4 class="sub--title">Project Title</h4>
+                    <ul role="list">
+                        <li role="listitem">GitHub: <a href="https://github.com/abc/project" target="_blank">GitHub Link</a></li>
+                        <li role="listitem">Live Demo: <a href="https://project.com" target="_blank">Project Link</a></li>
+                    </ul>
+                    <ul role="list">
+                        <li role="listitem">Developed a responsive website using HTML, CSS, and JavaScript.</li>
+                        <li role="listitem">Integrated third-party APIs to enhance functionality.</li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+
+        <!-- Education, Skills, and Languages Section (Left Side) -->
+        <section class="education-skills-languages">
+            <article class="education" contenteditable="true">
+                <h3 class="title">Education</h3>
+                <ul role="list">
+                    <li role="listitem">
+                        <h4 class="sub--title">Bachelor of Science in Computer Science</h4>
+                        <span>University of Computers, 2015 - 2019</span>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="skills" contenteditable="true">
+                <h3 class="title">Skills</h3>
+                <ul role="list">
+                    <li role="listitem">HTML</li>
+                    <li role="listitem">CSS</li>
+                    <li role="listitem">JavaScript</li>
+                    <li role="listitem">React</li>
+                </ul>
+            </article>
+
+            <article class="languages" contenteditable="true">
+                <h3 class="title">Languages</h3>
+                <ul role="list">
+                    <li role="listitem">English</li>
+                    <li role="listitem">Spanish</li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- Achievements -->
+        <article class="achievements" contenteditable="true">
+            <h3 class="title">Achievements</h3>
+            <ul role="list">
+                <li role="listitem">Certified in JavaScript by XYZ Academy</li>
+                <li role="listitem">Winner of Hackathon 2022</li>
+            </ul>
         </article>
     </main>
+
     <footer class="footer"></footer>
 </div>
+
 </body>
 </html>
